@@ -23,7 +23,7 @@ function OpenNPCUI()
         draw.RoundedBox(0, 0, 0, w, 40, Color(50, 50, 50))
         surface.SetDrawColor(25, 25, 25)
         surface.DrawOutlinedRect(0, 0, w, h, 5)
-        draw.SimpleText( "Vos Spins : " .. LocalPlayer():GetNWInt("Tokens"), "font_new_1", 310, 143, Color( 255, 255, 255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+        draw.SimpleText( "Vos Spins : " .. LocalPlayer():GetNWInt("Tokens"), "font_new_1", 310, 78, Color( 255, 255, 255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
     end
 
     local npcuimgclose = vgui.Create("DImageButton", npcuimg)

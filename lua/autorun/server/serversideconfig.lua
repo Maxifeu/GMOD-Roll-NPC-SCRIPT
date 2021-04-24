@@ -65,3 +65,34 @@ net.Receive("BUYSPIN", function(len, ply)
     file.Write("npcspin/" .. ply:SteamID64() .. "/spin.txt", (ply:GetNWInt("Tokens") or 0) + 1)
     ply:SetNWInt("Tokens", (ply:GetNWInt("Tokens") or 0) + 1)
 end)
+
+local function FindPlayerByName(Name) 
+    for k,v in pairs(player.GetAll()) do 
+        if v:Nick() == Name then    
+            return v 
+        end
+    end 
+end 
+
+
+
+local staffs = {
+    ["superadmin"] = true, 
+}
+concommand.Add("addspin", function(ply, spin, args )
+if not staffs[ply:GetUserGroup()] then 
+    ply:ChatPrint("Vous n'êtes pas superadmin !")
+    return 
+end
+
+    local targ = FindPlayerByName(args[1])
+    if targ == nil then
+        ply:ChatPrint("Pseudo invalide ou joueur déconnecté")
+        return
+    end
+
+    file.Write("npcspin/" .. targ:SteamID64() .. "/spin.txt", (targ:GetNWInt("Tokens") or 0) + (tonumber(args[2]) or 0))
+    targ:SetNWInt("Tokens", (targ:GetNWInt("Tokens") or 0) + (tonumber(args[2]) or 0))
+    ply:ChatPrint("Vous avez ajouté " .. args[2] .. " spins magie à " .. targ:Nick() .. ".")
+    targ:ChatPrint("Vous avez reçu " .. args[2] .. " spins de magie.")
+end)
