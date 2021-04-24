@@ -7,7 +7,7 @@ ENGLISH :
 I'm starting lua, i will update that script everytime until i finished it.
 
 
-Public releases on SteamWorkshop Garry's Mod : https://steamcommunity.com/sharedfiles/filedetails/?id=2465621624
+Public releases on Garry's Mod Steam Workshop : https://steamcommunity.com/sharedfiles/filedetails/?id=2465621624
 
 !! I'M WORKING ON AN ENGLISH TRADUCTION !!
 
@@ -40,7 +40,7 @@ FRANCAIS :
 Je démarre lua, je mettrai à jour ce script à chaque fois jusqu'à ce que je le termine.
 
 
-Versions normale SteamWorkshop Garry's Mod : https://steamcommunity.com/sharedfiles/filedetails/?id=2465621624
+Versions normale sur le Steam Workshop de Garry's Mod : https://steamcommunity.com/sharedfiles/filedetails/?id=2465621624
 
 !! JE TRAVAILLE SUR UNE TRADUCTION ANGLAISE !!
 
