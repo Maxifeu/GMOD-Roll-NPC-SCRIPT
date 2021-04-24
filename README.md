@@ -17,9 +17,7 @@ There's instruction in English for modification of the language and everything
 
 Current Release :
 
-- Admin console give spin command (you need to add groups who can use the command in the "staffs" category, usage : addspin me 500 (image : https://prnt.sc/11zopaa ) and target who 
-
-receive spins got chat message like : you receive x spins.
+- Admin console give spin command (you need to add groups who can use the command in the "staffs" category, usage : addspin me 500 (image : https://prnt.sc/11zopaa ) and target who receive spins got chat message like : you receive x spins.
 
 - Token system 
 
