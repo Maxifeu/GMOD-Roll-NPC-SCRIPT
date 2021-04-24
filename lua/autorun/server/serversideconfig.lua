@@ -29,13 +29,13 @@ hook.Add("PlayerInitialSpawn", "SPAWN_LUCAS", Spawn)
 
 net.Receive("NPCROLL", function(len, ply)
     if ply:GetNWInt("Tokens") <= 0 then 
-        ply:ChatPrint("Vous n'avez plus de spin !")
+        ply:ChatPrint("Vous n'avez plus de spin !") -- Message when you don't have enough spins
         return 
     end
     file.Write("npcspin/" .. ply:SteamID64() .. "/spin.txt", (ply:GetNWInt("Tokens") or 1) -1)
     ply:SetNWInt("Tokens", (ply:GetNWInt("Tokens") - 1))
 
-    ply:ChatPrint("Vous avez spin votre magie !")
+    ply:ChatPrint("Vous avez spin votre magie !") -- Message when you successfuly spin 
 
     local magies = {"du Feu", "de la Glace", "de l'Air", "de l'Eau"} -- Edit Here what you want to spin
 
@@ -57,11 +57,11 @@ end)
 
 net.Receive("BUYSPIN", function(len, ply)
     if ply:getDarkRPVar("money") < 50000 then
-        ply:ChatPrint("Vous n'avez pas assez.")
+        ply:ChatPrint("Vous n'avez pas assez.") -- Message when you don't have enough money to buy a spin
         return 
     end
     ply:addMoney(-50000) -- How much One Spin cost
-    ply:ChatPrint("Vous avez acheté un Spin !")
+    ply:ChatPrint("Vous avez acheté un Spin !") -- Message when you buy a spin
     file.Write("npcspin/" .. ply:SteamID64() .. "/spin.txt", (ply:GetNWInt("Tokens") or 0) + 1)
     ply:SetNWInt("Tokens", (ply:GetNWInt("Tokens") or 0) + 1)
 end)
@@ -76,18 +76,18 @@ end
 
 
 
-local staffs = {
+local staffs = { -- YOU NEED TO PUT YOUR STAFF GROUPS WHO CAN GIVE SPINS HERE
     ["superadmin"] = true, 
 }
 concommand.Add("addspin", function(ply, spin, args )
 if not staffs[ply:GetUserGroup()] then 
-    ply:ChatPrint("Vous n'êtes pas superadmin !")
+    ply:ChatPrint("Vous n'êtes pas superadmin !") -- YOU HAVE TO PUT THIS TO : You're not superadmin !
     return 
 end
 
     local targ = FindPlayerByName(args[1])
     if targ == nil then
-        ply:ChatPrint("Pseudo invalide ou joueur déconnecté")
+        ply:ChatPrint("Pseudo invalide ou joueur déconnecté") -- MESSAGE IF THE PLAYER NAME IS INCORRECT OR DECONNECTED
         return
     end
 

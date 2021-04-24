@@ -39,7 +39,7 @@ function OpenNPCUI()
     npcuirollbutt:SetSize(100, 30)
     npcuirollbutt:SetText("")
     npcuirollbutt.Paint = function(pan, w, h)
-        draw.SimpleText( "Spin", "font_new_1", w / 2, h /2, Color( 255, 255, 255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+        draw.SimpleText( "Spin", "font_new_1", w / 2, h /2, Color( 255, 255, 255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER ) -- Name of the button for start a spin
         draw.RoundedBox(0, 0, 0, w, h, (pan:IsDown() and Color( 0, 68, 145, 155) ) or ( pan:IsHovered() and Color( 0, 74, 182, 155) ) or Color( 0, 132, 255, 82))
         draw.RoundedBox(0, 1, 1, w-2, h-2, (pan:IsDown() and Color( 0, 68, 145, 155) ) or ( pan:IsHovered() and Color( 0, 74, 182, 155) ) or Color( 0, 132, 255, 82))
     end 
@@ -52,14 +52,14 @@ function OpenNPCUI()
     local npcuimgnom = vgui.Create("DLabel", npcuimg)
     npcuimgnom:SetPos(178, 10)
     npcuimgnom:SetSize(100, 20)
-    npcuimgnom:SetText("Spin Magie")
+    npcuimgnom:SetText("Spin Magie") -- name of the window
 
     local npcuirollbuttbuy = vgui.Create("DButton", npcuimg)
     npcuirollbuttbuy:SetPos(25, 65)
     npcuirollbuttbuy:SetSize(100, 30)
     npcuirollbuttbuy:SetText("")
     npcuirollbuttbuy.Paint = function(pan, w, h)
-        draw.SimpleText( "Acheter un Spin", "font_new_1", w / 2, h /2, Color( 255, 255, 255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+        draw.SimpleText( "Acheter un Spin", "font_new_1", w / 2, h /2, Color( 255, 255, 255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER ) -- Buy a spin text
         draw.RoundedBox(0, 0, 0, w, h, (pan:IsDown() and Color( 0, 68, 145, 155) ) or ( pan:IsHovered() and Color( 0, 74, 182, 155) ) or Color( 0, 132, 255, 82))
         draw.RoundedBox(0, 1, 1, w-2, h-2, (pan:IsDown() and Color( 0, 68, 145, 155) ) or ( pan:IsHovered() and Color( 0, 74, 182, 155) ) or Color( 0, 132, 255, 82))
     end
@@ -82,7 +82,7 @@ local function ResultatSpin(argument)
     npcuirollspinres:SetSize(300, 30)
     npcuirollspinres:SetText("")
     npcuirollspinres.Paint = function(pan, w, h)
-        draw.SimpleText("Vous contrôlez la magie " .. argument .. ".", "font_new_1")
+        draw.SimpleText("Vous contrôlez la magie " .. argument .. ".", "font_new_1") -- You got ...
     end
 
     function resspin:Paint(w, h)
@@ -94,7 +94,7 @@ local function ResultatSpin(argument)
     local resspinname = vgui.Create("DLabel", resspin)
     resspinname:SetPos(178, 10)
     resspinname:SetSize(200, 20)
-    resspinname:SetText("Spin Magie")
+    resspinname:SetText("Spin Magie") -- Magic spin 
 
     local resspinclose = vgui.Create("DImageButton", resspin)
     resspinclose:SetPos(365, 10)
