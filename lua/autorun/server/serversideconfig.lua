@@ -24,24 +24,45 @@ local function Spawn(ply)
         ply:SetNWInt("Tokens", 2)
     end
 end
+magies = {
+    [1] = "du Feu", -- mettre le même nom que la magie en dessous (respectuer les majuscules et les espaces) / put the name of the magic
+    [2] = "de la Glace",
+    [3] = "de l'Air",
+    [4] = "de l'Eau",
+}
+
+magiesswep = {
+    ["du Feu"] = { -- mettre le même nom que la magie au dessus (respectuer les majuscules et les espaces) - put the name of the magic 
+        ["swep"] = {"weapon_firem", "weapon_rpg",}, -- mettre l'arme que vous voulez / put de name of the swep you want to give to player
+    },
+    ["de la Glace"] = {
+        ["swep"] = {"weapon_fiveseven2",},
+    },
+    ["de l'Air"] = {
+        ["swep"] = {"weapon_mac102", "Nom du swep 2",},
+    },
+    ["de l'Eau"] = {
+        ["swep"] = {"ls_sniper", "Nom du swep 2",},
+    },
+}
 
 hook.Add("PlayerInitialSpawn", "SPAWN_LUCAS", Spawn)
 
 net.Receive("NPCROLL", function(len, ply)
-    if ply:GetNWInt("Tokens") <= 0 then 
-        ply:ChatPrint("Vous n'avez plus de spin !") -- Message when you don't have enough spins
-        return 
+    if ply:GetNWInt("Tokens") <= 0 then
+        ply:ChatPrint("[Spin] Vous n'avez plus de spin !") -- Message when you don't have enough spins
+
+        return
     end
-    file.Write("npcspin/" .. ply:SteamID64() .. "/spin.txt", (ply:GetNWInt("Tokens") or 1) -1)
-    ply:SetNWInt("Tokens", (ply:GetNWInt("Tokens") - 1))
 
-    ply:ChatPrint("Vous avez spin votre magie !") -- Message when you successfuly spin 
+    file.Write("npcspin/" .. ply:SteamID64() .. "/spin.txt", (ply:GetNWInt("Tokens") or 1) - 1)
+    ply:SetNWInt("Tokens", ply:GetNWInt("Tokens") - 1)
+    ply:ChatPrint("[Spin] Vous avez spin votre magie !") -- Message when you successfuly spin 
+    ply:Kill()
 
-    local magies = {"du Feu", "de la Glace", "de l'Air", "de l'Eau"} -- Edit Here what you want to spin
-
-    local value = math.random(1,#magies)
-
-	local picked_value = magies[value]
+    local key = math.random(1, #magies)
+    local picked_value = magies[key]
+    print(picked_value)
 
     local magie = {
         magie = picked_value,
@@ -50,9 +71,21 @@ net.Receive("NPCROLL", function(len, ply)
 
     local converted = util.TableToJSON(magie)
     file.Write("npcspin/" .. ply:SteamID64() .. "/magic.json", converted)
-	net.Start("resultatspin")
-      net.WriteString(picked_value)
+    net.Start("resultatspin")
+    net.WriteString(picked_value)
     net.Send(ply)
+end)
+
+hook.Add("PlayerSpawn", "GiveMagie", function(ply)
+    timer.Simple(1, function()
+      local mgi = util.JSONToTable(file.Read("npcspin/" .. ply:SteamID64() .. "/magic.json"))
+      print(mgi.magie)
+      PrintTable(magiesswep[mgi.magie].swep)
+      for k, v in pairs(magiesswep[mgi.magie].swep) do
+          print(v)
+          ply:Give(v)
+      end
+   end)
 end)
 
 net.Receive("BUYSPIN", function(len, ply)
@@ -74,8 +107,6 @@ local function FindPlayerByName(Name)
     end 
 end 
 
-
-
 local staffs = { -- YOU NEED TO PUT YOUR STAFF GROUPS WHO CAN GIVE SPINS HERE
     ["superadmin"] = true, 
 }
@@ -96,3 +127,4 @@ end
     ply:ChatPrint("Vous avez ajouté " .. args[2] .. " spins magie à " .. targ:Nick() .. ".")
     targ:ChatPrint("Vous avez reçu " .. args[2] .. " spins de magie.")
 end)
+

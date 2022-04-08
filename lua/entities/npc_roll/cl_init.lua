@@ -110,4 +110,5 @@ net.Receive("resultatspin", function()
     ResultatSpin(picked_value)
 end)
 
+
 net.Receive("NPCUI", OpenNPCUI)
